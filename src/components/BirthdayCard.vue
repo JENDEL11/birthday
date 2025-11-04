@@ -29,13 +29,19 @@ const flipCard = () => {
         </div>
         <div class="card-face card-back">
           <div>
-            <h2>Wishing You...</h2>
-            <p>
-              An amazing year filled with laughter, adventure, and unforgettable memories!
-              May all your dreams come true and may this year be your best one yet!
-              You deserve all the happiness in the world! 🎈✨
-            </p>
-          </div>
+  <h2>Wishing You...</h2>
+  <p>
+    A year filled with gentle mornings, peaceful nights, and days that overflow with
+    happiness. May you continue to grow into the person you're meant to be — confident,
+    inspired, and surrounded by love in every season of life.
+  </p>
+  <p>
+    May you find joy in the little things, strength during challenges, and courage to
+    chase every dream that makes your heart beat a little faster. The world is brighter
+    because you're in it — and this year is ready to show you just how loved you truly are. ✨💖
+  </p>
+</div>
+
         </div>
       </div>
     </div>

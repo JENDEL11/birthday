@@ -5,10 +5,36 @@ import BirthdayCard from './components/BirthdayCard.vue'
 import Balloons from './components/Balloons.vue'
 import BirthdayCake from './components/BirthdayCake.vue'
 import MessageBox from './components/MessageBox.vue'
+import BirthdayModal from './components/BirthdayModal.vue'
 import { makeItRain } from './utils/animations'
 
-const showEntrance = ref(true)
+// Controls showing modal
+const showBirthdayModal = ref(true)
 
+// Controls Entrance screen
+const showEntrance = ref(false)
+
+// Store birthday data
+const birthday = ref(null)
+
+// ✅ On mount: auto skip modal if user previously entered valid birthday
+onMounted(() => {
+  const savedBirthday = localStorage.getItem("birthday")
+  if (savedBirthday === "2025-11-05") {
+    birthday.value = savedBirthday
+    showBirthdayModal.value = false
+    showEntrance.value = true
+  }
+})
+
+// Called when user submits birthday
+const handleBirthdaySubmit = (date) => {
+  birthday.value = date
+  showBirthdayModal.value = false
+  showEntrance.value = true
+}
+
+// Start animation from EntranceScreen
 const startExperience = () => {
   showEntrance.value = false
   makeItRain()
@@ -17,31 +43,40 @@ const startExperience = () => {
 
 <template>
   <div class="app">
-    <EntranceScreen v-if="showEntrance" @start="startExperience" />
+    <!-- Birthday Input Modal -->
+    <BirthdayModal
+      :show="showBirthdayModal"
+      @birthday-submitted="handleBirthdaySubmit"
+    />
 
-    <div v-if="!showEntrance" class="container">
+    <!-- Entrance Screen shown AFTER modal -->
+    <EntranceScreen
+      v-if="showEntrance"
+      @start="startExperience"
+    />
+
+    <!-- EXPERIENCE CONTENT -->
+    <div v-if="!showEntrance && !showBirthdayModal" class="container">
       <!-- Intro Message Box -->
-      <div class="message-box intro">
-        <h1>🎉 HAPPY BIRTHDAY! 🎉</h1>
-        <p>Today is YOUR special day, and I wanted to create something extraordinary to celebrate YOU!</p>
-        <p>Get ready for some interactive surprises below...</p>
+     <div class="message-box intro">
+        <h1>🎉 HAPPY BIRTHDAY, John Doe! 🎉</h1>
+        <p>
+          Of all the days in the year, today stands out — because the world became a 
+          little brighter the moment you came into it.
+        </p>
+        <p>
+          You deserve joy, magic, and beautiful memories. Your surprise begins below. ✨
+        </p>
       </div>
 
-      <!-- 3D Card -->
+
       <BirthdayCard />
-
-      <!-- Interactive Balloons -->
       <Balloons />
-
-      <!-- Birthday Cake -->
       <BirthdayCake />
-
-      <!-- Surprise Buttons -->
       <MessageBox />
     </div>
   </div>
 </template>
-
 <style scoped>
 .app {
   min-height: 100vh;
