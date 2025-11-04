@@ -59,7 +59,7 @@ const startExperience = () => {
     <div v-if="!showEntrance && !showBirthdayModal" class="container">
       <!-- Intro Message Box -->
      <div class="message-box intro">
-        <h1>🎉 HAPPY BIRTHDAY, John Doe! 🎉</h1>
+        <h1>🎉 HAPPY BIRTHDAY, Jenny Joy Escobar! 🎉</h1>
         <p>
           Of all the days in the year, today stands out — because the world became a 
           little brighter the moment you came into it.
